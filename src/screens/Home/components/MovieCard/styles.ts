@@ -11,7 +11,6 @@ export const Container = styled.TouchableOpacity.attrs({
   height: 200px;
   background-color: ${({ theme }) => theme.colors.lightGray};
   border-radius: 8px;
-  /* margin: 5px; */
   margin-bottom: 20px;
 `;
 

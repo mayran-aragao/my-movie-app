@@ -30,7 +30,7 @@ const AuthTabRoutes = (): JSX.Element => {
           <Icon
             name={iconList[route.name] ?? iconList.Home}
             size={size}
-            color={color === '#4A00E0' ? 'primary' : 'gray'}
+            color={color === '#5061FC' ? 'primary' : 'gray'}
           />
         ),
       })}

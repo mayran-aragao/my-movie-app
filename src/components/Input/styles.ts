@@ -10,7 +10,7 @@ export const Container = styled.View`
   width: 100%;
   border-radius: 8px;
   border-width: 1px;
-  border-color: ${({ theme }) => theme.colors.white};
+  border-color: ${({ theme }) => theme.colors.lightGray};
   background-color: ${({ theme }) => theme.colors.white};
   align-items: center;
   margin-bottom: 20px;

@@ -6,11 +6,12 @@ import { Container, Image } from './styles';
 
 type IMovieCardProps = {
   item: IMovieProps;
+  onPress: Function;
 };
 
-const MovieCard = ({ item }: IMovieCardProps) => {
+const MovieCard = ({ item, onPress }: IMovieCardProps) => {
   return (
-    <Container>
+    <Container onPress={() => onPress(item.id)}>
       <Image
         source={{
           uri: `https://image.tmdb.org/t/p/w500/${item.poster_path}`,
