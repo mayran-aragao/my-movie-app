@@ -69,3 +69,7 @@ export interface ICastDetails {
 export interface ICastReponse {
   cast: ICastDetails[];
 }
+
+export interface IFavoriteButtonProps {
+  isMyFavorite: boolean;
+}

@@ -13,3 +13,12 @@ export interface IMovieProps {
   vote_average: number;
   vote_count: number;
 }
+
+export interface IGenresProps {
+  id: number;
+  name: string;
+}
+
+export interface IGenresResponse {
+  genres: IGenresProps[];
+}

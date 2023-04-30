@@ -1,5 +1,5 @@
 import styled from 'styled-components/native';
-import { ICastDetails } from './interfaces';
+import { ICastDetails, IFavoriteButtonProps } from './interfaces';
 import { FlatList, FlatListProps } from 'react-native';
 
 export const Container = styled.SafeAreaView`
@@ -59,11 +59,12 @@ export const Footer = styled.View`
 
 export const Favorite = styled.TouchableOpacity.attrs({
   activeOpacity: 0.75,
-})`
+})<IFavoriteButtonProps>`
   width: 100%;
   height: 50px;
   border-radius: 8px;
-  background-color: ${({ theme }) => theme.colors.success};
+  background-color: ${({ theme, isMyFavorite }) =>
+    isMyFavorite ? theme.colors.danger : theme.colors.success};
   justify-content: center;
   align-items: center;
 `;

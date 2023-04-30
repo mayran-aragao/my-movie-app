@@ -8,6 +8,13 @@ export const Container = styled.SafeAreaView`
   padding: ${24 + (StatusBar.currentHeight || 24)}px 20px 0 20px;
 `;
 
+export const Header = styled.View`
+  width: 100%;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+`;
+
 export const MovieList = styled(
   FlatList as new (props: FlatListProps<IMovieProps>) => FlatList<IMovieProps>
 ).attrs({

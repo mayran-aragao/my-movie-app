@@ -1,6 +1,8 @@
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
+import Icon from '../components/Icon';
+
 import AuthTabRoutes from './authenticated.tab';
 import MovieDetails from '../screens/MovieDetails';
 
@@ -24,7 +26,10 @@ const AuthenticatedRoutes = () => {
       <Stack.Screen
         name='MovieDetails'
         component={MovieDetails}
-        options={{ title: 'Detalhes' }}
+        options={{
+          title: 'Detalhes',
+          headerRight: () => <Icon name='share-variant' size={24} />,
+        }}
       />
     </Stack.Navigator>
   );
