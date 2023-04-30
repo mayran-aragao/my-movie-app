@@ -1,15 +1,19 @@
 import { ThemeProvider } from 'styled-components';
+import { StatusBar } from 'expo-status-bar';
+import { Provider } from 'react-redux';
+import { store } from './src/store';
 
 import Routes from './src/navigation';
 import { theme } from './src/theme';
-import { StatusBar } from 'expo-status-bar';
 
 const App = () => {
   return (
-    <ThemeProvider theme={theme}>
-      <Routes />
-      <StatusBar style='auto' />
-    </ThemeProvider>
+    <Provider store={store}>
+      <ThemeProvider theme={theme}>
+        <Routes />
+        <StatusBar style='auto' />
+      </ThemeProvider>
+    </Provider>
   );
 };
 

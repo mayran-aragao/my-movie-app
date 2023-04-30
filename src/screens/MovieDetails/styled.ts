@@ -8,7 +8,21 @@ export const Container = styled.SafeAreaView`
   background-color: ${({ theme }) => theme.colors.white};
 `;
 
-export const Header = styled.View`
+export const Content = styled.ScrollView.attrs({
+  contentContainerStyle: {
+    paddingBottom: 16,
+  },
+})`
+  flex: 1;
+`;
+
+export const LoadingView = styled.View`
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const GenericRowView = styled.View`
   flex-direction: row;
 `;
 
@@ -22,7 +36,9 @@ export const Image = styled.Image.attrs({
   margin-right: 10px;
 `;
 
-export const ImageView = styled.View``;
+export const ImageView = styled.View`
+  margin-right: 10px;
+`;
 
 export const TextView = styled.View`
   flex-shrink: 1;
@@ -49,12 +65,12 @@ export const Body = styled.View`
 
 export const CastList = styled(
   FlatList as new (props: FlatListProps<ICastDetails>) => FlatList<ICastDetails>
-)`
+).attrs({
+  contentContainerStyle: {
+    paddingTop: 16,
+  },
+})`
   flex: 1;
-`;
-
-export const Footer = styled.View`
-  flex-direction: row;
 `;
 
 export const Favorite = styled.TouchableOpacity.attrs({
@@ -67,4 +83,5 @@ export const Favorite = styled.TouchableOpacity.attrs({
     isMyFavorite ? theme.colors.danger : theme.colors.success};
   justify-content: center;
   align-items: center;
+  margin-top: 16px;
 `;
