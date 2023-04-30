@@ -1,12 +1,23 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React from 'react';
-import { View, Text } from 'react-native';
+import { Container } from './styles';
+import Button from '../../components/Button';
+import { useAppDispatch } from '../../store/hooks/useAppDispatch';
+import { signOut } from '../../store/user/thunks';
 
 const Profile = ({}: NativeStackScreenProps<any, 'Profile'>): JSX.Element => {
+  const dispatch = useAppDispatch();
+
   return (
-    <View>
-      <Text>Profile</Text>
-    </View>
+    <Container>
+      <Button
+        title='Sair'
+        color='danger'
+        variant='outline'
+        textColor='danger'
+        onPress={() => dispatch(signOut())}
+      />
+    </Container>
   );
 };
 

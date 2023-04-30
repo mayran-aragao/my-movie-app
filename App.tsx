@@ -5,6 +5,7 @@ import { store } from './src/store';
 
 import Routes from './src/navigation';
 import { theme } from './src/theme';
+import './src/config/firebase';
 
 const App = () => {
   return (
