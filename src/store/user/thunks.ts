@@ -14,7 +14,11 @@ export const loadUser = createAsyncThunk('load/user', async () => {
 });
 
 export const signOut = createAsyncThunk('signOut/user', async () => {
-  await AsyncStorage.removeItem(LocalStorageEnum.user);
+  await AsyncStorage.multiRemove([
+    LocalStorageEnum.user,
+    LocalStorageEnum.language,
+    LocalStorageEnum.favorites,
+  ]);
 
   return { email: '', uid: '' };
 });

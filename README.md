@@ -8,7 +8,7 @@
 </p>
 
 ## :computer: Sobre o projeto
-O My Movie App é uma aplicação usada para pesquisar filmes e salva-los a sua lista de favoritos.
+O My Movie App é uma aplicação usada para pesquisar filmes e salva-los a sua lista de favoritos. Basta registrar uma conta com email e senha, após é só fazer o login e terá acesso ao aplicativo. Os favoritos sao salvos localmente usando async storage.
 
 ## :rocket: Tecnologias utilizadas
 
