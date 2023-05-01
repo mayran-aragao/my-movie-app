@@ -38,7 +38,7 @@ Para executar esta aplicação em seu dispositivo no modo de desenvolvimento voc
 
 ```bash
 # acessar raiz do projeto
-$ cd qr-reader
+$ cd my-movie-app
 
 # instalar dependências do projeto
 $ yarn install or npm install
