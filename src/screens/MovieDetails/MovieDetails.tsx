@@ -14,7 +14,6 @@ import ApiService from '../../shared/services/ApiService';
 import { useAppSelector } from '../../store/hooks/useAppSelector';
 import { useAppDispatch } from '../../store/hooks/useAppDispatch';
 import {
-  loadMyfavorites,
   addToMyfavorites,
   deleteFromMyfavorites,
 } from '../../store/favorites/thunks';
@@ -30,6 +29,7 @@ const MovieDetails = ({
   const theme = useTheme();
   const dispatch = useAppDispatch();
   const myFavorites = useAppSelector((store) => store.favorites);
+  const language = useAppSelector((store) => store.language.language);
 
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [movieDetails, setMovieDetails] = useState<IMovieDetails>();
@@ -41,7 +41,7 @@ const MovieDetails = ({
       setIsLoading(true);
 
       const { data } = await ApiService.get(`/movie/${id}`, {
-        params: { language: 'pt-BR' },
+        params: { language },
       });
 
       setMovieDetails(data);
@@ -59,13 +59,12 @@ const MovieDetails = ({
       const {
         data: { cast },
       } = await ApiService.get<ICastReponse>(`/movie/${id}/credits`, {
-        params: { language: 'pt-BR' },
+        params: { language },
       });
 
       setMovieCast(cast);
     } catch (error) {
       console.log(error);
-      navigation.goBack();
     }
   };
 
@@ -77,10 +76,6 @@ const MovieDetails = ({
 
   const handleRemoveFavorite = async () => {
     dispatch(deleteFromMyfavorites(id));
-  };
-
-  const getMyFavoritesMovies = async () => {
-    dispatch(loadMyfavorites());
   };
 
   const handleShare = () => {
@@ -98,7 +93,7 @@ const MovieDetails = ({
     }
   };
 
-  const SetHeaderRight = () => {
+  const setHeaderRight = () => {
     navigation.setOptions({
       headerRight: () => (
         <Icon name='share-variant' size={24} onPress={handleShare} />
@@ -108,12 +103,9 @@ const MovieDetails = ({
 
   useEffect(() => {
     (async () => {
-      SetHeaderRight();
-      await Promise.all([
-        getMyFavoritesMovies(),
-        getMovieDetails(),
-        getMovieCredits(),
-      ]);
+      setHeaderRight();
+
+      await Promise.all([getMovieDetails(), getMovieCredits()]);
     })();
   }, []);
 

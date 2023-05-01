@@ -23,3 +23,9 @@ export const Image = styled.Image.attrs({
   border-color: white;
   border-width: 0.5px;
 `;
+
+export const ImageView = styled.View`
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+`;

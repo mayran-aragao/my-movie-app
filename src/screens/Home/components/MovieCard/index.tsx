@@ -2,7 +2,8 @@ import React from 'react';
 
 import { IMovieProps } from '../../interfaces';
 
-import { Container, Image } from './styles';
+import { Container, Image, ImageView } from './styles';
+import Text from '../../../../components/Text';
 
 type IMovieCardProps = {
   item: IMovieProps;
@@ -12,11 +13,19 @@ type IMovieCardProps = {
 const MovieCard = ({ item, onPress }: IMovieCardProps) => {
   return (
     <Container onPress={() => onPress(item.id)}>
-      <Image
-        source={{
-          uri: `https://image.tmdb.org/t/p/w500/${item.poster_path}`,
-        }}
-      />
+      <ImageView>
+        {item.poster_path ? (
+          <Image
+            source={{
+              uri: `https://image.tmdb.org/t/p/w500/${item.poster_path}`,
+            }}
+          />
+        ) : (
+          <Text size='normal' style={{ fontWeight: '500' }}>
+            Sem foto
+          </Text>
+        )}
+      </ImageView>
     </Container>
   );
 };

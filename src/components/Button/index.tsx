@@ -14,6 +14,7 @@ const Button = ({
   textColor,
   isLoading = false,
   onPress,
+  ...rest
 }: IButtonProps) => {
   const theme = useTheme();
   return (
@@ -21,6 +22,7 @@ const Button = ({
       color={color}
       variant={variant}
       onPress={!isLoading ? onPress : undefined}
+      {...rest}
     >
       {isLoading ? (
         <ActivityIndicator color={theme.colors[textColor]} />

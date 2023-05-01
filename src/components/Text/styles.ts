@@ -1,8 +1,9 @@
 import styled from 'styled-components/native';
+import { theme } from '../../theme';
 
 interface StyledTextProps {
   size: 'small' | 'normal' | 'large';
-  color?: string;
+  color?: keyof typeof theme.colors;
 }
 
 export const Container = styled.Text<StyledTextProps>`
@@ -10,7 +11,5 @@ export const Container = styled.Text<StyledTextProps>`
   line-height: ${(props) =>
     props.theme.text[props.size || 'normal'].lineHeight}px;
   color: ${({ color, theme }) =>
-    color
-      ? (theme.colors as Record<string, keyof typeof theme>)[color]
-      : theme.colors.secondary};
+    color ? theme.colors[color] : theme.colors.secondary};
 `;

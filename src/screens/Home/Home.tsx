@@ -3,24 +3,26 @@ import React, { useEffect, useRef, useState } from 'react';
 import { FlatList, ListRenderItem } from 'react-native';
 
 import ApiService from '../../shared/services/ApiService';
+import useDebounce from '../../shared/hooks/useDebounce';
 
 import { Input } from '../../components/Input';
 import MovieCard from './components/MovieCard';
 import { Loading } from '../../components/Loading';
 import Icon from '../../components/Icon';
-import GenresModal from '../MovieDetails/components/GenresModal';
-
-import useDebounce from '../../shared/hooks/useDebounce';
+import { ToastBottomAndroid } from '../../components/ToastBottomAndroid';
+import GenresModal from './components/GenresModal';
+import { useAppSelector } from '../../store/hooks/useAppSelector';
 
 import { IGenresProps, IGenresResponse, IMovieProps } from './interfaces';
 
-import { Container, MovieList, Header } from './styles';
-import { ToastBottomAndroid } from '../../components/ToastBottomAndroid';
+import { Container, MovieList, Header, Image, ImageView } from './styles';
 
 const Home = ({
   navigation,
 }: NativeStackScreenProps<any, 'Home'>): JSX.Element => {
   const listRef = useRef<FlatList>(null);
+  const language = useAppSelector((store) => store.language.language);
+  const sortBy = useAppSelector((store) => store.sortBy.sortBy);
 
   const [movies, setMovies] = useState<IMovieProps[]>([]);
   const [page, setPage] = useState<number>(1);
@@ -40,7 +42,8 @@ const Home = ({
 
       const requestParams = {
         page,
-        language: 'pt-BR',
+        language,
+        sort_by: sortBy,
         ...(debounceSearchTerm.length ? { query: debounceSearchTerm } : {}),
         ...(filterGenre ? { with_genres: filterGenre } : {}),
       };
@@ -107,7 +110,7 @@ const Home = ({
       const { data } = await ApiService.get<IGenresResponse>(
         '/genre/movie/list',
         {
-          params: { language: 'pt-BR', page },
+          params: { language, page },
         }
       );
 
@@ -126,16 +129,12 @@ const Home = ({
       return '/search/movie';
     }
 
-    if (filterGenre) {
-      return '/discover/movie';
-    }
-
-    return '/movie/popular';
+    return '/discover/movie';
   };
 
   useEffect(() => {
     getMovies();
-  }, [page, filterGenre, debounceSearchTerm]);
+  }, [page, filterGenre, debounceSearchTerm, language, sortBy]);
 
   useEffect(() => {
     getGenresList();
@@ -171,12 +170,12 @@ const Home = ({
         />
       </Header>
 
-      {!!movies.length && (
+      {!!movies.length ? (
         <MovieList
           ref={listRef}
           data={movies}
           renderItem={renderItem}
-          keyExtractor={(item: IMovieProps, index) => `${item.id + index}`}
+          keyExtractor={(item: IMovieProps, index) => `${item.id}`}
           numColumns={2}
           showsVerticalScrollIndicator={false}
           columnWrapperStyle={{ justifyContent: 'space-between' }}
@@ -185,6 +184,12 @@ const Home = ({
           onEndReached={handleEndOfList}
           onEndReachedThreshold={0.5}
         />
+      ) : (
+        !isLoading && (
+          <ImageView>
+            <Image source={require('../../assets/no-favorites.jpg')} />
+          </ImageView>
+        )
       )}
 
       <Loading isLoading={isLoading} size='large' />

@@ -24,3 +24,16 @@ export const MovieList = styled(
 })`
   flex: 1;
 `;
+
+export const ImageView = styled.View`
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const Image = styled.Image.attrs({
+  resizeMode: 'contain',
+})`
+  height: 224px;
+  /* align-self: center; */
+`;

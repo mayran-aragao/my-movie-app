@@ -4,7 +4,7 @@ import { IUserSignInProps } from './interfaces';
 import { loadUser, signOut } from './thunks';
 
 export const userSlice = createSlice({
-  name: 'favorites',
+  name: 'user',
   initialState: userInitialState,
   reducers: {
     signIn: (_, action: PayloadAction<IUserSignInProps>) => {

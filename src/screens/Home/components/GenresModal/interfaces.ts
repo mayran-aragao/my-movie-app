@@ -1,5 +1,5 @@
 import { ModalBaseProps } from 'react-native';
-import { IGenresProps } from '../../../Home/interfaces';
+import { IGenresProps } from '../../interfaces';
 
 export interface IModalProps extends ModalBaseProps {
   genres: IGenresProps[];
